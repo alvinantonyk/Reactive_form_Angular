@@ -1,0 +1,17 @@
+input{
+    width: 300px;
+}
+
+.gender{
+    display: flex;
+    flex-direction: row;
+    input{
+        width: auto;
+    }
+    
+   
+}
+
+label{
+  margin-top: 10px;
+}

@@ -1,0 +1,107 @@
+<form [formGroup]="LoginForm" style="display: flex;flex-direction: column;" (ngSubmit)="submitForm()">
+  <label for="firstName">First Name</label>
+  <input type="text" id="firstName" formControlName="firstName">
+  <div *ngIf="LoginForm.get('firstName')?.hasError('required') && submitted">
+    First name is required.
+  </div>
+  <div *ngIf="LoginForm.get('firstName')?.hasError('maxlength')">
+    First name must be at most 20 characters long.
+  </div>
+
+  <label for="lastName">Last Name</label>
+  <input type="text" id="lastName" formControlName="lastName">
+  <div *ngIf="LoginForm.get('lastName')?.hasError('required')&& submitted">
+    Last name is required.
+  </div>
+  <div *ngIf="LoginForm.get('lastName')?.hasError('maxlength')">
+    Last name must be at most 20 characters long.
+  </div>
+
+  <label for="middleName">Middle Name</label>
+  <input type="text" id="middleName" formControlName="middleName">
+
+  <label for="age">Age</label>
+  <input type="text" id="age" formControlName="age">
+  <div *ngIf="LoginForm.get('age')?.hasError('required')&& submitted">
+    Age is required.
+  </div>
+  <div *ngIf="LoginForm.get('age')?.hasError('pattern')">
+    Please enter a valid age.
+  </div>
+  <div *ngIf="LoginForm.get('age')?.hasError('max') || LoginForm.get('age')?.hasError('min')">
+    Age must be between 10 and 50
+  </div>
+
+  <label class="gender">Gender
+  <div *ngFor="let option of options">
+    <input type="radio" [value]="option.value" formControlName="selectedOption">
+    {{ option.label }}
+  </div>
+</label>
+  <div *ngIf="LoginForm.get('selectedOption')?.hasError('required')&& submitted">
+    Gender is required.
+  </div>
+
+
+  <div formGroupName="address" style="display: flex;flex-direction: column;">
+    <label for="street">Street</label>
+    <input type="text" id="street" formControlName="street">
+    <div *ngIf="LoginForm.get('address.street')?.hasError('required')&& submitted">
+      Street is required.
+    </div>
+    <div *ngIf="LoginForm.get('address.street')?.hasError('maxlength')">
+      Street must be at most 20 characters long.
+    </div>
+
+    <label for="landmark">Landmark</label>
+    <input type="text" id="landmark" formControlName="landmark">
+    <!-- Add ngIf for landmark validators if needed -->
+
+    <label for="city">City</label>
+    <input type="text" id="city" formControlName="city">
+    <div *ngIf="LoginForm.get('address.city')?.hasError('required')&& submitted">
+      City is required.
+    </div>
+    <div *ngIf="LoginForm.get('address.city')?.hasError('maxlength')">
+      City must be at most 20 characters long.
+    </div>
+
+    <label for="state">State</label>
+    <input type="text" id="state" formControlName="state">
+    <div *ngIf="LoginForm.get('address.state')?.hasError('required')&& submitted">
+      State is required.
+    </div>
+    <div *ngIf="LoginForm.get('address.state')?.hasError('maxlength')">
+      State must be at most 20 characters long.
+    </div>
+
+    <label for="zipCode">ZipCode</label>
+    <input type="text" id="zipCode" formControlName="zipCode">
+    <div *ngIf="LoginForm.get('address.zipCode')?.hasError('required')&& submitted">
+      ZipCode is required.
+    </div>
+    <div *ngIf="LoginForm.get('address.zipCode')?.hasError('pattern')">
+      Please enter a valid ZipCode.
+    </div>
+
+    <label for="country">Country</label>
+    <input type="text" id="country" formControlName="country">
+    <div *ngIf="LoginForm.get('address.country')?.hasError('required')&& submitted">
+      Country is required.
+    </div>
+    <div *ngIf="LoginForm.get('address.country')?.hasError('maxlength')">
+      Country must be at most 20 characters long.
+    </div>
+  </div>
+
+  <label for="hobbies">Hobbies:</label>
+  <div>
+    <div class="warning" *ngFor="let hobby of LoginForm.get('hobbies')?.value; let i = index">
+      <input type="text" placeholder="Hobby {{ i + 1 }}">
+    </div>
+    <button type="button" (click)="addHobby()">Add Hobby</button>
+    
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
