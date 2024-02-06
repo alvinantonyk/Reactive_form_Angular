@@ -94,12 +94,18 @@
     </div>
   </div>
 
+  <div formArrayName="hobbies">
   <label for="hobbies">Hobbies:</label>
   <div>
-    <div class="warning" *ngFor="let hobby of LoginForm.get('hobbies')?.value; let i = index">
-      <input type="text" placeholder="Hobby {{ i + 1 }}">
-    </div>
-    <button type="button" (click)="addHobby()">Add Hobby</button>
+   
+    <div *ngFor="let hobby of hobbies.controls; let i = index">
+      <input type="text" [formControlName]="i" placeholder="Hobby {{ i + 1 }}">
+      <span *ngIf="i===0">
+        <button type="button" (click)="addHobby()">Add Hobby</button>
+       </span>
+  </div>
+  </div>
+
     
   </div>
 

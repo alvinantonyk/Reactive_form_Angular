@@ -35,27 +35,31 @@ export class AppComponent implements OnInit{
   addHobby() {
     
     const hobbiesFormArray = this.LoginForm.get('hobbies') as FormArray;
-    
     hobbiesFormArray.push(new FormControl(''));
+    
+  }
+  get hobbies() {
+    return this.LoginForm.get('hobbies') as FormArray;
   }
 
-  // Initialize with default value if needed
-
-  // Define the options for the radio buttons
+ 
   options = [
     { value: 'Male', label: 'Male' },
     { value: 'Female', label: 'Female' },
     { value: 'other', label: 'Other' }
   ];
   public submitted=false;
+  
   submitForm(){
     this.submitted=true
+    console.log(this.LoginForm)
+    
   }
-  
 
 
   ngOnInit(): void {
       this.addHobby()
-     
+      
+      
   }
 }
